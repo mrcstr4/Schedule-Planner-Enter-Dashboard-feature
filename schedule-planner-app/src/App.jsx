@@ -5,25 +5,33 @@ import ProtectedRoutes from './utils/ProtectedRoutes';
 import RegisterForm from './pages/RegistrationForm';
 import AdminRegistrationForm from './pages/AdminRegistrationForm';
 import Login from './pages/Login';
-import Dashboard from './pages/Dashboard' 
+import Dashboard from './pages/Employee/Dashboard' 
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/Admin/AdminDashboard';
+import ForgotPassword from './pages/ForgotPassword';
 
 
 
 
 function App() {
   return (
-    <AuthContextProvider> {/* */}
+    <AuthContextProvider> 
     <Router>
         <Routes>
             {/* Public Routes */}
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<RegisterForm />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+
             <Route path="/admin/register" element={<AdminRegistrationForm />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            
 
             {/* protected routes*/}
             <Route element={<ProtectedRoutes />}>
-                <Route path="/homepage" element={<Dashboard />} />
+            <Route path="/homepage" element={<Dashboard />} />
+                <Route path="/admin/homepage" element={<AdminDashboard />} />
             </Route>
 
         </Routes>
@@ -31,7 +39,7 @@ function App() {
 </AuthContextProvider>
   );
 }
-// Welcome Page Component
+// 
 function Welcome() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">

@@ -2,8 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import logo from "../assets/a2klogo.png";
 import logoApp from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 
-const RegisterForm = () => {
+const AdminRegistrationForm = () => {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -11,10 +12,12 @@ const RegisterForm = () => {
     department: "",
     password: "",
     confirmPassword: "",
-    isAdmin: true,
   });
 
+  const navigate = useNavigate()
+
   const [errors, setErrors] = useState({});
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,17 +37,18 @@ const RegisterForm = () => {
 
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await axios.post("http://localhost:4000/api/auth/register", formData, {
+        const response = await axios.post("http://localhost:4000/api/auth/admin/register", formData, {
           headers: { "Content-Type": "application/json" },
         });
   
         if (response.status === 200) {
           alert("Register successfully");
           console.log(formData);
+          navigate("/admin/login")
+          
         }
       } catch (error) {
-        console.error("Error:", error);
-        alert("Fail to register");
+        setError(error.response?.data?.message)
       }
     } else {
       setErrors(validationErrors);
@@ -61,9 +65,11 @@ const RegisterForm = () => {
     
       <div className="w-full max-w-md">
         <div className="w-full max-w-md">
+        
           <h2 className="text-2xl font-bold mb-2 text-left">Create admin account</h2> 
           <div className="p-8 bg-white rounded-lg shadow-md">
             <form onSubmit={handleSubmit} className="space-y-4">
+            {error && <p className="text-red-500 text-center mb-4">{error}</p>}
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm font-medium text-gray-700">Firstname</label>
@@ -157,7 +163,7 @@ const RegisterForm = () => {
 
             </form>
             <p className="text-center text-sm mt-4">
-              Already have an <a href="/" className="text-blue-500">account?</a>
+              Already have an <a href="/admin/login" className="text-blue-500">account?</a>
             </p>
           </div>
         </div>
@@ -166,4 +172,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default AdminRegistrationForm;

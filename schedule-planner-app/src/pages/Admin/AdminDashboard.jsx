@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import logo from "../assets/a2klogo.png";
-import logoApp from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 
 
-const HomePage = () => {
-  const testt = null
+const AdminDashboard = () => {
+
    const [test, setTest] = useState("");
   const handleSubmit = () => {
-    testt = "tttttttt"
+    setTest("tessssttttt")
     
   }
 
@@ -18,7 +16,7 @@ const HomePage = () => {
   const handleLogout = () => {
     setTest("");
     localStorage.clear();
-    navigate("/login")
+    navigate("/admin/login")
   }
 
 
@@ -67,4 +65,4 @@ const HomePage = () => {
 
 
 
-export default HomePage;
+export default AdminDashboard;
