@@ -1,13 +1,26 @@
 import React, { useState } from "react";
 import lockIcon from "../assets/unlock.png"; // Lock icon image
+import axios from "axios";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle password reset logic here
-    console.log("Reset link sent to:", email);
+    setLoading(true);
+
+    try {
+      const response = await axios.post("http://localhost:4000/api/auth/forgetPassword", { email });
+
+      if (response.status === 200) {
+        alert("Reset link sent! Check your email.");
+      }
+    } catch (error) {
+      alert(error.response?.data?.message || "Something went wrong. Try again!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -27,9 +40,12 @@ const ForgotPassword = () => {
           />
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+            className={`w-full text-white py-2 rounded-md transition ${
+              loading ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"
+            }`}
+            disabled={loading}
           >
-            Reset Password
+            {loading ? "Sending..." : "Reset Password"}
           </button>
         </form>
       </div>

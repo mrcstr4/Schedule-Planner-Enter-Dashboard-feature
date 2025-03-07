@@ -6,9 +6,10 @@ import AdminRegistrationForm from './pages/AdminRegistrationForm';
 import Login from './pages/Login';
 import Dashboard from './pages/Employee/Dashboard' 
 import AdminLogin from './pages/AdminLogin';
-import ForgotPasswordAdmin from './pages/ForgotPasswordAdmin';
+
 import ForgotPassword from './pages/ForgotPassword';
 import AdminDashboard from './pages/Admin/AdminDashboard';
+import ResetPassword from './pages/ResetPassword';
 
 
 
@@ -23,11 +24,12 @@ function App() {
         {/* User Registration Page */}
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
 
         {/* Admin Registration Page - Only accessible via URL */}
         <Route path="/admin/register" element={<AdminRegistrationForm />} />
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/forgot-password" element={<ForgotPasswordAdmin />} />
+        
         <Route path="/admin/homepage" element={<AdminDashboard />} />
       
 
