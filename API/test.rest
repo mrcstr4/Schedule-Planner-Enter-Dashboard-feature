@@ -1,7 +1,32 @@
+POST http://localhost:4000/api/auth/forgetPassword
+Content-Type: application/json
+
+{
+   "email":"castrosalmer0604@gmail.com"
+}
+
+###
 POST http://localhost:4000/api/auth/login
 Content-Type: application/json
 
 {
-   "email":"123@gmail.com",
-   "password":"12345678"
+   "email":"castrosalmer0604@gmail.com",
+   "password":"mercastro1"
 }
+
+###
+
+
+POST http://localhost:4000/api/auth/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2M5OWNhMjU2YjJlM2EyMGM1MzZlZjAiLCJpYXQiOjE3NDEzMTQ4NzAsImV4cCI6MTc0MTMxNTQ3MH0.Iy8KEQDN-5xDyjQQpanxR8pZZkQ54Mul-ChC3qnvCnA
+Content-Type: application/json
+
+{
+   "newPassword": "mercastro1"
+}
+
+
+###
+
+
+
+
